@@ -2,44 +2,28 @@
 
 /* http://docs.angularjs.org/guide/dev_guide.e2e-testing */
 
-describe('my app', function() {
+describe('my app', function () {
 
-  beforeEach(function() {
-    browser().navigateTo('../../app/index.html');
-  });
+    describe('repeater scenario', function () {
 
-
-  it('should automatically redirect to /view1 when location hash/fragment is empty', function() {
-    expect(browser().location().url()).toBe("/view1");
-  });
+        beforeEach(function () {
+            browser().navigateTo('../../app/repeater.html');
+        });
 
 
-  describe('view1', function() {
+        it('should be possible to set the values in repeater generated inputs', function () {
+            repeatingInput("char.value", 0).enter("a");
+            repeatingInput("char.value", 1).enter("n");
+            repeatingInput("char.value", 2).enter("g");
+            repeatingInput("char.value", 3).enter("u");
+            repeatingInput("char.value", 4).enter("l");
+            repeatingInput("char.value", 5).enter("a");
+            repeatingInput("char.value", 6).enter("r");
+            element("#concat").click();
+            expect(element("#message").text()).toBe("angular");
+        });
 
-    beforeEach(function() {
-      browser().navigateTo('#/view1');
     });
 
 
-    it('should render view1 when user navigates to /view1', function() {
-      expect(element('[ng-view] p:first').text()).
-        toMatch(/partial for view 1/);
-    });
-
-  });
-
-
-  describe('view2', function() {
-
-    beforeEach(function() {
-      browser().navigateTo('#/view2');
-    });
-
-
-    it('should render view2 when user navigates to /view2', function() {
-      expect(element('[ng-view] p:first').text()).
-        toMatch(/partial for view 2/);
-    });
-
-  });
 });

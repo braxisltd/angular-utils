@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en" ng-app>
+<head>
+    <meta charset="utf-8">
+    <title>My AngularJS App</title>
+    <script src="lib/jquery-1.7.2.min.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="js/repeater.js"></script>
+    <style>
+        input {
+            width: 20px;
+        }
+    </style>
+</head>
+<body ng-controller="RepeaterCtrl">
+<span ng-repeat="char in chars">
+    <input ng-model="char.value">
+</span>
+<button id="concat" ng-click="concat()">concatenate</button>
+<span id="message">{{message}}</span>
+</body>
+</html>
