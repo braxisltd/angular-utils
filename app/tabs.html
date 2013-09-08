@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app="braxis.ui.tabs">
+<head>
+    <title>Tabs</title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/tabs.css"/>
+    <script type="text/javascript" src="lib/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="lib/angular-1.2.0.rc2/angular.js"></script>
+    <script type="text/javascript" src="js/tabs.js"></script>
+</head>
+<body>
+<tabset>
+    <tab>
+        <heading class="head1">heading 1</heading>
+        <content>content 1</content>
+    </tab>
+    <tab ng-init="cls = 'head2'">
+        <heading ng-class="cls">heading 2</heading>
+        <content>content 2</content>
+    </tab>
+</tabset>
+</body>
+</html>
