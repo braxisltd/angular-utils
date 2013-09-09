@@ -9,15 +9,29 @@
     <script type="text/javascript" src="js/tabs.js"></script>
 </head>
 <body>
-<tabset>
-    <tab>
-        <heading class="head1">heading 1</heading>
-        <content>content 1</content>
-    </tab>
-    <tab ng-init="cls = 'head2'">
-        <heading ng-class="cls">heading 2</heading>
-        <content>content 2</content>
-    </tab>
-</tabset>
+<section id="element">
+    <tabset>
+        <tab>
+            <heading class="head1">heading 1</heading>
+            <content>content 1</content>
+        </tab>
+        <tab ng-init="cls = 'head2'">
+            <heading ng-class="cls">heading 2</heading>
+            <content>content 2</content>
+        </tab>
+    </tabset>
+</section>
+<section id="attribute">
+    <div tabset>
+        <div tab>
+            <div heading class="head1">heading 1</div>
+            <div content>content 1</div>
+        </div>
+        <div tab ng-init="cls = 'head2'">
+            <div heading ng-class="cls">heading 2</div>
+            <div content>content 2</div>
+        </div>
+    </div>
+</section>
 </body>
 </html>
