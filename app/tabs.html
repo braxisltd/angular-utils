@@ -8,14 +8,14 @@
     <script type="text/javascript" src="lib/angular-1.2.0.rc2/angular.js"></script>
     <script type="text/javascript" src="js/tabs.js"></script>
 </head>
-<body>
+<body ng-init="cls = 'head2'">
 <section id="element">
     <tabset>
         <tab>
             <heading class="head1">heading 1</heading>
             <content>content 1</content>
         </tab>
-        <tab ng-init="cls = 'head2'">
+        <tab>
             <heading ng-class="cls">heading 2</heading>
             <content>content 2</content>
         </tab>
@@ -27,11 +27,19 @@
             <div heading class="head1">heading 1</div>
             <div content>content 1</div>
         </div>
-        <div tab ng-init="cls = 'head2'">
+        <div tab>
             <div heading ng-class="cls">heading 2</div>
             <div content>content 2</div>
         </div>
     </div>
+</section>
+<section id="repeater" ng-init="data = [{h:'heading 1', c:'content 1'}, {h:'heading 2', c:'content 2'}]">
+    <tabset>
+        <tab ng-repeat="el in data">
+            <heading>{{ el.h }}</heading>
+            <content>{{ el.c }}</content>
+        </tab>
+    </tabset>
 </section>
 </body>
 </html>

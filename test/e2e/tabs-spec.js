@@ -10,13 +10,25 @@ describe('tabs', function () {
         });
 
         assertions();
+        classAssertions();
     });
 
-    describe('using element', function () {
+    describe('using attribute', function () {
 
         beforeEach(function () {
             browser().navigateTo('/app/tabs.html');
             scopedSelector = '#attribute';
+        });
+
+        assertions();
+        classAssertions();
+    });
+
+    describe('using repeater', function () {
+
+        beforeEach(function () {
+            browser().navigateTo('/app/tabs.html');
+            scopedSelector = '#repeater';
         });
 
         assertions();
@@ -45,20 +57,22 @@ describe('tabs', function () {
             assertPanes();
         });
 
-        it('static classes should be pushed onto the headings', function () {
-            assertStaticClasses();
-        });
-
-        it('dynamic classes should be pushed onto the headings', function () {
-            assertDynamicClasses();
-        });
-
         it('first tab should default to active and only content for the first pane should be visible', function () {
             assertDefualtToFirstTab();
         });
 
         it('clicking on the second tab should switch behaviour', function () {
             assertSwicthTabs();
+        });
+    }
+
+    function classAssertions() {
+        it('static classes should be pushed onto the headings', function () {
+            assertStaticClasses();
+        });
+
+        it('dynamic classes should be pushed onto the headings', function () {
+            assertDynamicClasses();
         });
     }
 

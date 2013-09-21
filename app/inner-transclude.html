@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tabs</title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/tabs.css"/>
+    <script type="text/javascript" src="lib/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="lib/angular-1.2.0.rc2/angular.js"></script>
+    <script type="text/javascript">
+        angular.module('inner-transclude', [])
+                .directive('outer', function ($timeout) {
+                    return {
+                        restrict: 'E',
+                        replace: true,
+                        transclude: true,
+                        template: '<div>' +
+                                '<ul ng-transclude></ul>' +
+                                '<div class="count"></div>' +
+                                '</div>',
+                        controller: ['$scope', function ($scope) {
+                            $scope.count = 0;
+                            this.increment = function () {
+                                $scope.count++;
+                            }
+                        }],
+                        link: function (scope, element, attrs) {
+                            function countLis() {
+                                var liCount = element.find('li').length;
+                                element.find('.count').text(liCount);
+                            }
+                            scope.$watch('count', countLis);
+                        }
+
+                    }
+                })
+                .directive('inner', function () {
+                    return {
+                        restrict: 'E',
+                        replace: true,
+                        transclude: true,
+                        require: '^outer',
+                        template: '<li ng-transclude last-tab></li>',
+                        link: function (scope, element, attrs, outerCtrl) {
+                            console.log('inner');
+                            outerCtrl.increment();
+                        }
+
+                    }
+                })
+                .directive('lastTab', function() {
+                    return {
+                        restrict:'A',
+                        link:function (scope, element, attrs) {
+                                                    if (scope.$last) {
+                                                        console.log('rendering last')
+                                                    }
+                        }
+
+                    }
+                })
+                .controller('page', function ($scope) {
+                    $scope.items = [0, 1];
+                    $scope.add = function () {
+                        $scope.items.push($scope.items.length)
+                    };
+                    $scope.remove = function () {
+                        $scope.items.pop();
+                    };
+                })
+
+    </script>
+</head>
+<body ng-app="inner-transclude" ng-controller="page">
+<outer>
+    <inner>i1</inner>
+    <inner>i2</inner>
+</outer>
+<button ng-click="add()">add</button>
+<button ng-click="remove()">remove</button>
+<outer>
+    <inner ng-repeat="item in items">{{ item }}</inner>
+</outer>
+</body>
+</html>

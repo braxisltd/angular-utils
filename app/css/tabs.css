@@ -1,3 +1,7 @@
 div.tab-content {
     margin: 5px;
 }
+
+.hide-pane {
+    display: none;
+}
